@@ -1,0 +1,33 @@
+def cleaning(diabetes):
+    
+    """ diabetes is a dataframe """
+    
+    # Primero quitamos las columnas que no queremos
+    
+    diabetes = diabetes.drop([
+                            # Valores de segunda medida
+                            "diagnosdm", "tiempoadm","fecha2","peso2","talla2","cintura2","ntratami2",
+                            "X25oh2","urico2","crea2","colester2","triglice2","hdl2","ldl2","glucemia2",
+                            "microalc2", "cistatin2","fibrinog2","pcr2","hbglicos2","insulina2","homa2",
+                            "antiagr2","diureti2","betablo2","alfablo2","calcioa2","ieca2", "tiempo.censo",
+                            "araii2","tas_s2","tad_s2","fc_s2","diferenciafechas", "imc2", "sm2", "hta2", 
+                            "ncrit_sm2", "epi2", "dislipe2", "Unnamed: 0", "fechaglucometria", "fnacimien",
+                            "fecha1", "nsagrado",
+                              
+                            # tratamientos
+                            "dislipe1", "antiagr1", "diureti1", "betablo1", "alfablo1", "calcioa1", "ieca1", "araii1",
+                            
+                            # otros
+                            "peso1", "colester1", "progres_microalc"
+                              ], axis=1)
+    
+    # Nos aseguramos de que las columnas tengan sus tipos de clase correspondiente
+    
+    for key in diabetes.keys(): 
+        if diabetes[key].dtype == object:    
+            diabetes[key] = diabetes[key].astype(float)
+            
+        if diabetes[key].dtype == bool:    
+            diabetes[key] = diabetes[key].astype(int)
+            
+    return diabetes
